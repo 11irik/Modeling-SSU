@@ -6,12 +6,12 @@ import org.knowm.xchart.XYChart;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
-import java.util.Arrays;
+import java.util.*;
 
 public class ModelingTest {
 
     @Test
-    public void testOne() throws IOException {
+    public void task1() throws IOException {
         PopulationDynamic populationDynamic = new PopulationDynamic(
                 0.0, 10.0, 1.0, 10.0, 
                 1.0, 10, 0.0, 100.0);
@@ -24,8 +24,7 @@ public class ModelingTest {
     }
 
     @Test
-    public void testTwo() throws IOException {
-        
+    public void task2() throws IOException {
         double[] xs = {0, 1, 2, 3, 4, 5, 3};
         double[] ys = {0, 2, 0, 2, 0, 2, 1};
 
@@ -64,5 +63,40 @@ public class ModelingTest {
         }
 
         System.out.println(Arrays.stream(daysCounts).average().getAsDouble());
+    }
+
+    @Test
+    public void task4() {
+        //x - y < 1
+        //y - x < 2
+    }
+    
+    @Test
+    public void task5() {
+        Double mu = 80.0;
+        Double sigmaSqr = 25.0;
+        NormalDistribution normalDistribution = new NormalDistribution(mu, Math.sqrt(sigmaSqr));
+        
+        List<Double> list1 = new ArrayList<>();
+        List<Double> list2 = new ArrayList<>();
+        List<Double> list3 = new ArrayList<>();
+
+        for (int i = 0; i < 1000; ++i) {
+            Double[] elems = {normalDistribution.get(), normalDistribution.get(), normalDistribution.get()};
+            Arrays.sort(elems);
+            list1.add(elems[0]);
+            list2.add(elems[1]);
+            list3.add(elems[2]);
+        }
+
+        System.out.println(list1.stream()
+                .mapToDouble((x) -> x)
+                .summaryStatistics());
+        System.out.println(list2.stream()
+                .mapToDouble((x) -> x)
+                .summaryStatistics());
+        System.out.println(list3.stream()
+                .mapToDouble((x) -> x)
+                .summaryStatistics());
     }
 }
