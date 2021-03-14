@@ -99,4 +99,30 @@ public class ModelingTest {
                 .mapToDouble((x) -> x)
                 .summaryStatistics());
     }
+
+    @Test
+    public void task6() {
+        Double lambda= 0.1;
+
+        ExponentialDistribution exponentialDistribution = new ExponentialDistribution(lambda);
+        List<Double> systemLife = new ArrayList<>();
+        List<Double> beforeSecondDied = new ArrayList<>();
+
+        for (int i = 0; i < 1000; ++i) {
+            Double[] elems = {exponentialDistribution.get(), exponentialDistribution.get()};
+            Arrays.sort(elems);
+
+            Double reserve = exponentialDistribution.get();
+
+            systemLife.add(elems[1] + reserve);
+            beforeSecondDied.add(elems[1]);
+        }
+
+        System.out.println(systemLife.stream()
+                .mapToDouble((x) -> x)
+                .summaryStatistics());
+        System.out.println(beforeSecondDied.stream()
+                .mapToDouble((x) -> x)
+                .summaryStatistics());
+    }
 }
