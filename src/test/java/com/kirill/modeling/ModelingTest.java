@@ -67,8 +67,18 @@ public class ModelingTest {
 
     @Test
     public void task4() {
-        //x - y < 1
-        //y - x < 2
+        EvenDistribution evenDistribution = new EvenDistribution(0, 25);
+        int crosses = 0;
+        int count = 10000000;
+       
+        for (int i = 0; i < count; ++i) {
+            if (evenDistribution.isCross()) {
+                crosses++;
+            }
+        }
+        
+        double probability = crosses * 1.0 / count;
+        System.out.println(probability);
     }
     
     @Test
